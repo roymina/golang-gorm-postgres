@@ -1,0 +1,34 @@
+@host = http://localhost:8000/api
+@token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzAxNjc3MzgsImlhdCI6MTY3MDE2NjgzOCwibmJmIjoxNjcwMTY2ODM4LCJzdWIiOjF9.XeQ2PpV4tEjfjud7xAeplTNB4nFc7Rv8A8uo8pnYsY8GW5jAjK9EcUXg2NvKnZ-pQppErhyvq1CHKGYU1PUNci0sbdVlQJ5YDuPUK0SXbkBPeYIioM-TXXa_FEs5ziBxzrpIH2YecSwAykio6O1vrSUJL09BLnc1-hOX_j3Nyz0
+### CHECK
+GET {{host}}/health HTTP/1.1
+
+### 注册
+POST {{host}}/auth/register HTTP/1.1
+
+{
+    "name":"test",
+    "email":"test@163.com",
+    "password":"12345678",
+    "passwordConfirm":"12345678",
+    "Photo":"test photo"
+
+}
+
+### 登录
+POST {{host}}/auth/login HTTP/1.1
+
+{    
+    "email":"test@163.com",
+    "password":"12345678"
+}
+
+### me
+GET {{host}}/users/me HTTP/1.1
+Authorization: Bearer {{token}}
+
+### refresh token
+GET  {{host}}/auth/refresh HTTP/1.1 
+
+### logout
+GET {{host}}/auth/logout HTTP/1.1
