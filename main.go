@@ -14,10 +14,10 @@ import (
 var (
 	server              *gin.Engine
 	AuthController      controllers.AuthController
-	AuthRouteController routes.AuthRouteController
+	AuthRoute routes.AuthRoute
 
 	UserController      controllers.UserController
-	UserRouteController routes.UserRouteController
+	UserRoute routes.UserRoute
 )
 
 func init() {
@@ -28,10 +28,10 @@ func init() {
 	initializers.ConnectDB(&config)
 
 	AuthController = controllers.NewAuthController(initializers.DB)
-	AuthRouteController = routes.NewAuthRouteController(AuthController)
+	AuthRoute = routes.NewAuthRoute(AuthController)
 
 	UserController = controllers.NewUserController(initializers.DB)
-	UserRouteController = routes.NewRouteUserController(UserController)
+	UserRoute = routes.NewUserRoute(UserController)
 
 	server = gin.Default()
 }
@@ -55,8 +55,8 @@ func main() {
 		message := "welcome to golang gorm postgres server"
 		ctx.JSON(http.StatusOK, gin.H{"status": "success", "message": message})
 	})
-	AuthRouteController.AuthRoute(router)
-	UserRouteController.UserRoute(router)
+	AuthRoute.AuthRoute(router)
+	UserRoute.UserRoute(router)
 	
 	log.Fatal(server.Run(":" + config.ServerPort))
 }

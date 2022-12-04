@@ -5,15 +5,15 @@ import (
 	"github.com/roymina/golang-gorm-postgres/controllers"
 )
 
-type AuthRouteController struct {
+type AuthRoute struct {
 	authController controllers.AuthController
 }
 
-func NewAuthRouteController(authController controllers.AuthController) AuthRouteController {
-	return AuthRouteController{authController}
+func NewAuthRoute(authController controllers.AuthController) AuthRoute {
+	return AuthRoute{authController}
 }
 
-func (rc *AuthRouteController) AuthRoute(rg *gin.RouterGroup){
+func (rc *AuthRoute) AuthRoute(rg *gin.RouterGroup){
 	router:=rg.Group("/auth")
 
 	router.POST("/register",rc.authController.SignUpUser)

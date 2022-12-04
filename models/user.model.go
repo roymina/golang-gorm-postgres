@@ -10,7 +10,7 @@ type User struct {
 	gorm.Model
 	Name      string    `gorm:"type:varchar(255);not null"`
 	Email     string    `gorm:"uniqueIndex;not null"`
-	Password  string    `gorm:"not null"`
+	Password  string    `gorm:"not null" json:"-"` //json:"-"表示这个字段不出现在返回客户端的json中
 	Role      string    `gorm:"type:varchar(255);not null"`
 	Provider  string    `gorm:"not null"`
 	Photo     string    `gorm:"not null"`
